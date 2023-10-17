@@ -1,4 +1,4 @@
-import { ethers, BigNumber } from 'ethers';
+import { ethers, toBigInt } from 'ethers';
 import { useEffect, useState } from 'react';
 import Hero from '../artifacts/contracts/Hero.sol/Hero.json';
 
@@ -24,17 +24,23 @@ useEffect(() => {
 }, [] );
 
 //Minting
-const [power, quickness, intuition, int, health, presence, name, setStats] = useState(10, 10, 10, 10, 10, 10, "Name");
+const [power, setPower] = useState();
+const [quickness, setQuickness] = useState();
+const [intuition, setIntuition] = useState();
+const [int, setInt] = useState();
+const [health, setHealth] = useState();
+const [presence, setPresence] = useState();
+const [name, setName] = useState();
 
 const isConnected = Boolean(accounts[0]);
 
 async function handleMint() {
   if(window.ethereum) {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(heroAddress, Hero.abi, signer);
     try{
-      const data = await contract.safeMint(BigNumber.from(power), BigNumber.from(quickness), BigNumber.from(intuition), BigNumber.from(int), BigNumber.from(health), BigNumber.from(presence), name,);
+      const data = await contract.safeMint(toBigInt.from(power), toBigInt.from(quickness), toBigInt.from(intuition), toBigInt.from(int), toBigInt.from(health), toBigInt.from(presence), name,);
       console.log('data: ', data);
     } catch (error) {
       console.log('Error: ', error);
@@ -51,16 +57,50 @@ async function handleMint() {
             <div>
             <p>Connected</p>
             <br/>
-            <input placeholder="Power" type='number' value={power} />
-            <input placeholder="Quickness" type='number' value={quickness}/>
-            <input placeholder="Intuition" type='number' value={intuition}/>
-            <input placeholder="Intelegence" type='number' value={int}/>
-            <input placeholder="Health" type='number' value={health}/>
-            <input placeholder="Presence" type='number' value={presence}/>
-            <input placeholder="Name" type='string' value={name} />
+            <input
+                placeholder="Power"
+                type="number"
+                value={power}
+                onChange={(e) => setPower(e.target.value)}
+            />
+            <input
+                placeholder="Quickness"
+                type="number"
+                value={quickness}
+                onChange={(e) => setQuickness(e.target.value)}
+            />
+            <input
+                placeholder="Intuition"
+                type="number"
+                value={intuition}
+                onChange={(e) => setIntuition(e.target.value)}
+            />
+            <input
+                placeholder="Int"
+                type="number"
+                value={int}
+                onChange={(e) => setInt(e.target.value)}
+            />
+            <input
+                placeholder="Health"
+                type="number"
+                value={health}
+                onChange={(e) => setHealth(e.target.value)}
+            />
+            <input
+                placeholder="Presence"
+                type="number"
+                value={presence}
+                onChange={(e) => setPresence(e.target.value)}
+            />
+            <input
+                placeholder="Name"
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+            />
             {accounts.length && ( 
             <div> 
-                <button onClick={() => setStats(power, quickness, intuition, int, health, presence, name)} > Set Stats </button>
                 <button onClick={handleMint}> Mint </button>
             </div>
             
