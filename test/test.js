@@ -7,8 +7,9 @@ describe("Hero Contract", function () {
   async function deployTokenFixture(){
     //set up fixture to run for every test
     const Hero = await ethers.getContractFactory("Hero");
-    const hero = await Hero.deploy();
     const [owner, addr1] = await ethers.getSigners();
+    const hero = await Hero.deploy(owner.address);
+    
     
     //mint a token
     const mintTx = await hero.safeMint(owner.address, "Howard", 16, 16, 11, 11, 11, 10);
@@ -84,8 +85,9 @@ describe("Hero Contract", function () {
     it("Should fail if power is to low", async function() {
       const strength = 5;
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
+      
 
       await expect(hero.safeMint(owner.address, "Howard", strength, 16, 11, 11, 11, 10)).to.be.revertedWith("Your Power is to low");
     });
@@ -93,8 +95,8 @@ describe("Hero Contract", function () {
     it("Should fail if power is to high", async function() {
       const strength = 19;
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", strength, 10, 10, 10, 10, 10)).to.be.revertedWith("You can't be that strong!");
     });
@@ -102,8 +104,8 @@ describe("Hero Contract", function () {
     it("Should fail if quickness is to low", async function() {
 
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 5, 11, 11, 11, 10)).to.be.revertedWith("You're to slow!");
     });
@@ -111,8 +113,8 @@ describe("Hero Contract", function () {
     it("Should fail if quickness is to high", async function() {
      
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 19, 11, 11, 11, 10)).to.be.revertedWith("You're to fast!");
     });
@@ -120,8 +122,8 @@ describe("Hero Contract", function () {
     it("Should fail if intuition is to low", async function() {
 
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 16, 5, 11, 11, 10)).to.be.revertedWith("Your intuition is to low");
     });
@@ -129,8 +131,8 @@ describe("Hero Contract", function () {
     it("Should fail if intuition is to high", async function() {
      
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 16, 19, 11, 11, 10)).to.be.revertedWith("You intuition is to high");
     });
@@ -138,8 +140,8 @@ describe("Hero Contract", function () {
     it("Should fail if intelect is to low", async function() {
 
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 16, 11, 5, 11, 10)).to.be.revertedWith("Your intelligence is to low");
     });
@@ -147,8 +149,8 @@ describe("Hero Contract", function () {
     it("Should fail if intelect is to high", async function() {
      
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 16, 11, 19, 11, 10)).to.be.revertedWith("Your intelligence is to high");
     });
@@ -156,8 +158,8 @@ describe("Hero Contract", function () {
     it("Should fail if health is to low", async function() {
 
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 16, 11, 11, 5, 10)).to.be.revertedWith("Your health is to low");
     });
@@ -165,8 +167,8 @@ describe("Hero Contract", function () {
     it("Should fail if health is to high", async function() {
      
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 16, 11, 11, 19, 10)).to.be.revertedWith("Your health is to high!");
     });
@@ -174,8 +176,8 @@ describe("Hero Contract", function () {
     it("Should fail if presence is to low", async function() {
 
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 16, 11, 11, 11, 1)).to.be.revertedWith("Your presence is to low");
     });
@@ -183,8 +185,8 @@ describe("Hero Contract", function () {
     it("Should fail if presence is to high", async function() {
      
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 16, 11, 11, 11, 19)).to.be.revertedWith("You presence is to high");
     });
@@ -193,8 +195,8 @@ describe("Hero Contract", function () {
     it("Should fail if total stat score is to low", async function() {
 
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 16, 11, 11, 11, 12)).to.be.revertedWith("Stats must add up to 75");
     });
@@ -202,8 +204,8 @@ describe("Hero Contract", function () {
     it("Should fail if total stat score is to high", async function() {
      
       const Hero = await ethers.getContractFactory("Hero");
-      const hero = await Hero.deploy();
       const [owner] = await ethers.getSigners();
+      const hero = await Hero.deploy(owner.address);
 
       await expect(hero.safeMint(owner.address, "Howard", 16, 16, 11, 11, 10, 10)).to.be.revertedWith("Stats must add up to 75");
     });

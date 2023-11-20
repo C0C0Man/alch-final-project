@@ -1,16 +1,17 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.9;
+pragma solidity ^0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+
 
 contract Hero is ERC721, Ownable {
-    constructor() ERC721("Hero", "HRO") {
-    }
-    using Counters for Counters.Counter;
+    uint256 private _nextTokenId;
 
-    Counters.Counter private _tokenIdCounter;
+    constructor(address initialOwner)
+        ERC721("Hero", "HRO")
+        Ownable(initialOwner)
+    {}
     mapping(uint256 => string) public tokenNames;
     //stats
     mapping(uint256 => uint256) public power;
@@ -26,7 +27,8 @@ contract Hero is ERC721, Ownable {
         address to, string memory name, 
         uint256 powerStat, uint256 quickStat, uint256 intuitionStat, 
         uint256 intStat, uint256 healthStat, uint256 presenceStat
-        ) public onlyOwner {
+        ) public {
+        uint256 tokenId = _nextTokenId++;
         //stat requirements
         uint256 statTotal = powerStat + quickStat + intuitionStat + intStat + healthStat + presenceStat;
         require(powerStat >= 6, "Your Power is to low");
@@ -44,8 +46,6 @@ contract Hero is ERC721, Ownable {
         require(statTotal == 75, "Stats must add up to 75");
 
 
-        uint256 tokenId = _tokenIdCounter.current();
-        _tokenIdCounter.increment();
         _safeMint(to, tokenId);
         tokenNames[tokenId] = name;
 
