@@ -30,8 +30,8 @@ contract Hero is ERC721, Ownable {
         uint256 statTotal = powerStat + deductionStat + healthStat + presenceStat;
         require(powerStat >= 2, "Your Power is to low");
         require(powerStat <= 10, "You can't be that strong!");
-        require(deductionStat >= 2, "You're to slow!");
-        require(deductionStat <= 10, "You're to fast!");
+        require(deductionStat >= 2, "You're deduction is to low");
+        require(deductionStat <= 10, "You're deduction is to high!");
         require(healthStat >= 2, "Your health is to low");
         require(healthStat <= 10, "Your health is to high!");
         require(presenceStat >= 2, "Your presence is to low");
@@ -64,7 +64,7 @@ contract Hero is ERC721, Ownable {
         return power[tokenId];
     }
 
-    function getTokenIntelect(uint256 tokenId) public view returns (uint256) {
+    function getTokenDeduction(uint256 tokenId) public view returns (uint256) {
         return deduction[tokenId];
     }
 

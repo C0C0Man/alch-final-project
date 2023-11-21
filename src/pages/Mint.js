@@ -5,7 +5,7 @@ import heroABI from '../HeroABI.json';
 function Mint () {
 
   //contract address
-const heroAddress = "0xF9741E5fc83E44970f6963c979573d96Bb1336ae";
+const heroAddress = "0xd920744eC057bd3C7E0F38BE39EBd3a65221211b";
 
 
 //state hooks for address connecting
