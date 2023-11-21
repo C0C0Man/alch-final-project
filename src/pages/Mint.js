@@ -5,7 +5,7 @@ import heroABI from '../HeroABI.json';
 function Mint () {
 
   //contract address
-const heroAddress = "0x430585AF28cD9631f5B51313791012Ca6f3469E2";
+const heroAddress = "0xF9741E5fc83E44970f6963c979573d96Bb1336ae";
 
 
 //state hooks for address connecting
@@ -24,9 +24,7 @@ useEffect(() => {
 
 //Minting
 const [power, setPower] = useState();
-const [quickness, setQuickness] = useState();
-const [intuition, setIntuition] = useState();
-const [int, setInt] = useState();
+const [deduction, setDeduction] = useState();
 const [health, setHealth] = useState(); 
 const [presence, setPresence] = useState();
 const [name, setName] = useState();
@@ -43,19 +41,17 @@ const handleMint = async (e) => {
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(heroAddress, heroABI, signer);
 
-      const data = await contract.safeMint(signer, name, power, quickness, intuition, int, health, presence);
+      const data = await contract.safeMint(signer, name, power, deduction, health, presence);
 
       // Event listener to grab data from
       
-      contract.on("TokenMinted", (owner, tokenId, tokenName, stStat, quStat, intelStat, intuStat, healStat, presStat, event) => {
+      contract.on("TokenMinted", (owner, tokenId, tokenName, pwStat, dedStat, healStat, presStat, event) => {
         let mintEvent ={
           to: owner,
           tokenId: tokenId,
           name: tokenName,
-          power: stStat,
-          quickness: quStat,
-          intuition: intuStat,
-          int: intelStat,
+          power: pwStat,
+          deduction: dedStat,
           health: healStat,
           presence: presStat,
           event
@@ -98,22 +94,10 @@ const handleMint = async (e) => {
                 onChange={(e) => setPower(e.target.value)}
             />
             <input
-                placeholder="Quickness"
+                placeholder="Deduction"
                 type="number"
-                value={quickness}
-                onChange={(e) => setQuickness(e.target.value)}
-            />
-            <input
-                placeholder="Intuition"
-                type="number"
-                value={intuition}
-                onChange={(e) => setIntuition(e.target.value)}
-            />
-            <input
-                placeholder="Int"
-                type="number"
-                value={int}
-                onChange={(e) => setInt(e.target.value)}
+                value={deduction}
+                onChange={(e) => setDeduction(e.target.value)}
             />
             <input
                 placeholder="Health"

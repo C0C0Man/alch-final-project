@@ -15,35 +15,28 @@ contract Hero is ERC721, Ownable {
     mapping(uint256 => string) public tokenNames;
     //stats
     mapping(uint256 => uint256) public power;
-    mapping(uint256 => uint256) public quickness;
-    mapping(uint256 => uint256) public intuition;
-    mapping(uint256 => uint256) public intelect;
+    mapping(uint256 => uint256) public deduction;
     mapping(uint256 => uint256) public health;
     mapping(uint256 => uint256) public presence;
 
-    event TokenMinted(address indexed owner, uint256 indexed tokenId, string tokenName, uint256 stStat, uint256 quStat, uint256 intelStat, uint256 intuStat, uint256 healStat, uint256 presStat);
+    event TokenMinted(address indexed owner, uint256 indexed tokenId, string tokenName, uint256 pwStat, uint256 dedStat, uint256 healStat, uint256 presStat);
 
     function safeMint(
         address to, string memory name, 
-        uint256 powerStat, uint256 quickStat, uint256 intuitionStat, 
-        uint256 intStat, uint256 healthStat, uint256 presenceStat
+        uint256 powerStat, uint256 deductionStat, uint256 healthStat, uint256 presenceStat
         ) public {
         uint256 tokenId = _nextTokenId++;
         //stat requirements
-        uint256 statTotal = powerStat + quickStat + intuitionStat + intStat + healthStat + presenceStat;
-        require(powerStat >= 6, "Your Power is to low");
-        require(powerStat <= 18, "You can't be that strong!");
-        require(quickStat >= 6, "You're to slow!");
-        require(quickStat <= 18, "You're to fast!");
-        require(intuitionStat >= 6, "Your intuition is to low");
-        require(intuitionStat <= 18, "You intuition is to high");
-        require(intStat >= 6, "Your intelligence is to low");
-        require(intStat <= 18, "Your intelligence is to high");
-        require(healthStat >= 6, "Your health is to low");
-        require(healthStat <= 18, "Your health is to high!");
-        require(presenceStat >= 6, "Your presence is to low");
-        require(presenceStat <= 18, "You presence is to high");
-        require(statTotal == 75, "Stats must add up to 75");
+        uint256 statTotal = powerStat + deductionStat + healthStat + presenceStat;
+        require(powerStat >= 2, "Your Power is to low");
+        require(powerStat <= 10, "You can't be that strong!");
+        require(deductionStat >= 2, "You're to slow!");
+        require(deductionStat <= 10, "You're to fast!");
+        require(healthStat >= 2, "Your health is to low");
+        require(healthStat <= 10, "Your health is to high!");
+        require(presenceStat >= 2, "Your presence is to low");
+        require(presenceStat <= 10, "You presence is to high");
+        require(statTotal == 30, "Stats must total must equal 30!");
 
 
         _safeMint(to, tokenId);
@@ -51,16 +44,14 @@ contract Hero is ERC721, Ownable {
 
         //Stat mapping
         power[tokenId] = powerStat;
-        quickness[tokenId] = quickStat;
-        intuition[tokenId] = intuitionStat;
-        intelect[tokenId] = intStat;
+        deduction[tokenId] = deductionStat;
         health[tokenId] = healthStat;
         presence[tokenId] = presenceStat;
 
 
         //Next step is to create and mint stats
 
-         emit TokenMinted(msg.sender, tokenId, name, powerStat, quickStat, intuitionStat, intStat, healthStat, presenceStat); 
+         emit TokenMinted(msg.sender, tokenId, name, powerStat, deductionStat, healthStat, presenceStat); 
     }
 
     function getTokenName(uint256 tokenId) public view returns (string memory) {
@@ -73,16 +64,8 @@ contract Hero is ERC721, Ownable {
         return power[tokenId];
     }
 
-    function getTokenQuickness(uint256 tokenId) public view returns (uint256) {
-        return quickness[tokenId];
-    }
-
-    function getTokenIntuition(uint256 tokenId) public view returns (uint256) {
-        return intuition[tokenId];
-    }
-
     function getTokenIntelect(uint256 tokenId) public view returns (uint256) {
-        return intelect[tokenId];
+        return deduction[tokenId];
     }
 
     function getTokenHealth(uint256 tokenId) public view returns (uint256) {
