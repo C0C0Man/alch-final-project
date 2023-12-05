@@ -3,6 +3,7 @@ import './App.css';
 import Home from './pages/Home';
 import Mint from './pages/Mint';
 import Navbar from './pages/Navbar';
+import MyPeeps from './pages/MyPeeps';
 
 
 
@@ -19,6 +20,7 @@ function App() {
           <Route path='/' element={<Home />}/>
           <Route path='mint' element={<Mint />}/>
           <Route path='*' element={<h1> Page Not Found</h1>} />
+          <Route path='mypeeps' element= {<MyPeeps />} />
         </Routes>
       </Router>
     </div>

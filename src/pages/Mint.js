@@ -29,6 +29,8 @@ const [health, setHealth] = useState();
 const [presence, setPresence] = useState();
 const [name, setName] = useState();
 
+const [mintEvents, setMintEvents] = useState([]);
+
 const isConnected = Boolean(accounts[0]);
 
 
@@ -42,11 +44,11 @@ const handleMint = async (e) => {
       const contract = new ethers.Contract(heroAddress, heroABI, signer);
 
       const data = await contract.safeMint(signer, name, power, deduction, health, presence);
-
+      
       // Event listener to grab data from
       
       contract.on("TokenMinted", (owner, tokenId, tokenName, pwStat, dedStat, healStat, presStat, event) => {
-        let mintEvent ={
+        let newMintEvent ={
           to: owner,
           tokenId: tokenId,
           name: tokenName,
@@ -55,8 +57,11 @@ const handleMint = async (e) => {
           health: healStat,
           presence: presStat,
           event
-        }
-        console.log(mintEvent);
+        };
+        const updatedMintEvents = [...mintEvents, newMintEvent];
+        setMintEvents(updatedMintEvents);
+
+        console.log(newMintEvent);
       });
       
       
@@ -129,8 +134,22 @@ const handleMint = async (e) => {
                 <button onClick={connectAccounts}>Connect</button>
                 </div>
         )}
+        <br></br>
+        <div className="grid">
+         {mintEvents.map((mintEvent) => (
+         <div className="mint-card" key={mintEvent.tokenId}>
+            <p>Owner: {mintEvent.to}</p>
+            <p>Token ID: {`${mintEvent.tokenId}`}</p>
+            <p>Token Name: {mintEvent.name}</p>
+            <p>Power: {`${mintEvent.power}`}</p>
+            <p>Deduction: {`${mintEvent.deduction}`}</p>
+            <p>Health: {`${mintEvent.health}`}</p>
+            <p>Presence: {`${mintEvent.presence}`}</p>
+          </div>
+        ))}
+      </div>
+    </div>
         
-        </div>
     );
 }
 
