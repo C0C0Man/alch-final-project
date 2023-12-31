@@ -1,0 +1,88 @@
+.nft-card {
+    width: 250px;
+    height: 350px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+    margin: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .nft-card .header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .nft-card .header h3 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  
+  .nft-card .header p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+  }
+  
+  .nft-card .info-section {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .nft-card .info-section p {
+    margin-bottom: 5px;
+  }
+  
+  .nft-card .info-section .stat-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .nft-card .info-section .stat-label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .nft-card .info-section .stat-value {
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .nft-card .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 15px;
+  }
+  
+  /* Additional styling for specific elements (adjust as needed) */
+  .nft-card .hero-name {
+    font-weight: bold;
+    font-style: italic;
+    color: black;
+  }
+  
+  .nft-card .power-value {
+    color: #c54a4a; /* Red */
+  }
+  
+  .nft-card .health-value {
+    color: #5e954a; /* Green */
+  }
+  
+  .nft-card .deduction-value {
+    color: blue;
+  }
+
+  .nft-card .presence-value {
+    color: grey; /* Red */
+  }
+  
+  

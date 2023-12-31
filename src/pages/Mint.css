@@ -1,0 +1,113 @@
+/* Overall layout */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+  }
+  
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd; /* Adjust color and thickness */
+    border-radius: 5px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    background-size: cover;
+    background-color: #545454;
+  }
+  
+  /* Title */
+  .title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+    color: white;
+  }
+  
+  /* Connected status */
+  .connected {
+    color: green; /* Adjust as needed */
+  }
+  
+  /* Input fields */
+  .input-field {
+    display: block;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Buttons */
+  .mint-button,
+  .connect-button {
+    background-color: #007bff; /* Adjust as needed */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .mint-button:hover,
+  .connect-button:hover {
+    background-color: #0062cc; /* Adjust as needed */
+  }
+  
+  /* Grid of minted tokens */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Adjust width as needed */
+    grid-gap: 20px; /* Adjust spacing between cards */
+    margin-top: 20px;
+  }
+  
+  .mint-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  /* Individual card content */
+  .mint-card p {
+    margin-bottom: 5px;
+  }
+  
+  /* Overall card container */
+.mint-card {
+    border: 1px solid #ccc; /* Add a border */
+    padding: 20px; /* Add some padding */
+    border-radius: 5px; /* Rounded corners */
+    margin-bottom: 20px; /* Space between cards */
+    background-color: #fff; /* White background */
+    text-align: left; /* Left-align content */
+  }
+  
+  /* Card title */
+  .mint-card-title {
+    font-size: 18px; /* Larger font for title */
+    margin-bottom: 10px; /* Space below title */
+  }
+  
+  /* Card information container */
+  .mint-card-info {
+    margin-bottom: 10px; /* Space below info section */
+  }
+  
+  /* Owner and token ID labels */
+  .mint-card-owner,
+  .mint-card-token-id {
+    font-weight: bold; /* Make labels bold */
+  }
+  
+  /* Stats container */
+  .mint-card-stats {
+    display: flex; /* Display stats in a row */
+    justify-content: space-between; /* Space out stats evenly */
+  }
+  
+  /* Individual stats */
+  .mint-card-stats span {
+    margin-right: 10px; /* Add a small margin between stats */
+  }
+  

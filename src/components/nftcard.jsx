@@ -1,31 +1,39 @@
-const NFTCard = ({ id, address, name, heroName, power, deduction, health, presence}) => {
-    return (
-        <div className="w-1/4 mr-3 mb-4 bg-slate-100 rounded-md" >
-            <div className="p-3">
-                <div className="flex mb-3">
-                    <div className="flex-grow">
-                        <h3 className="text-xl">{name}</h3>
-                        <p>{`${id.slice(0, 4)}...${id.slice(id.length - 4)}`}</p>
-                    </div>
-                    <div className="flex mr-3">
-                        <a target="_blank" className="text-blue-700" href={`https://sepolia.etherscan.io/token/${address}`}>{`${address.slice(0, 4)}...${address.slice(address.length - 4)}`}</a>
-                    </div>
-                </div>
-                <p>Hero NFT</p>
-                <p>Hero Name: {heroName}</p>
-                <p>Hero Power: {Number(power)}</p>
-                <p>Hero deduction: {Number(deduction)}</p>
-                <p>Hero Health: {Number(health)}</p>
-                <p>Hero presence: {Number(presence)}</p>
-            </div>
-            <div className="flex flex-wrap justify-center items-center p-3 ">
+import './nftcard.css'; // Import the CSS file
 
-                <div>
-                   
-                </div>
-            </div>
+const NFTCard = ({ id, address, name, heroName, power, deduction, health, presence }) => {
+  return (
+    <div className="nft-card">
+      <div className="header">
+        <h3 className="nft-card-name">{name}</h3>
+        <p className="nft-card-address">
+          <a href={`https://sepolia.etherscan.io/token/${address}`} target="_blank">
+          {`${address.slice(0, 4)}...${address.slice(address.length - 4)}`}
+          </a>
+        </p>
+        <p>{`${id.slice(0, 4)}...${id.slice(id.length - 4)}`}</p>
+      </div>
+      <div className="info-section">
+        <p>Hero NFT</p>
+        <p className="hero-name">Hero Name: {heroName}</p>
+        <div className="stat-section">
+          <span className="stat-label">Hero Power:</span>
+          <span className="stat-value power-value">{Number(power)}</span>
         </div>
-    )
-}
+        <div className="stat-section">
+          <span className="stat-label">Hero Deduction:</span>
+          <span className="stat-value deduction-value">{Number(deduction)}</span>
+        </div>
+        <div className="stat-section">
+          <span className="stat-label">Hero Health:</span>
+          <span className="stat-value health-value">{Number(health)}</span>
+        </div>
+        <div className="stat-section">
+          <span className="stat-label">Hero Presence:</span>
+          <span className="stat-value presence-value">{Number(presence)}</span>
+        </div>
+      </div>    
+    </div>
+  );
+};
 
 export default NFTCard;

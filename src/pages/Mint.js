@@ -1,6 +1,7 @@
 import { ethers } from 'ethers';
 import { useEffect, useState } from 'react';
 import heroABI from '../HeroABI.json';
+import './Mint.css'; 
 
 function Mint () {
 
@@ -83,74 +84,86 @@ const handleMint = async (e) => {
 
 } 
 
-    return (
-    <div>
-        <h1> Mint </h1>
-        <br/>
-        
-        {isConnected ? (
-            <div>
-            <p>Connected</p>
-            <br/>
-            <input
-                placeholder="Power"
-                type="number"
-                value={power}
-                onChange={(e) => setPower(e.target.value)}
-            />
-            <input
-                placeholder="Deduction"
-                type="number"
-                value={deduction}
-                onChange={(e) => setDeduction(e.target.value)}
-            />
-            <input
-                placeholder="Health"
-                type="number"
-                value={health}
-                onChange={(e) => setHealth(e.target.value)}
-            />
-            <input
-                placeholder="Presence"
-                type="number"
-                value={presence}
-                onChange={(e) => setPresence(e.target.value)}
-            />
-            <input
-                placeholder="Name"
-                type="text"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-            />
-            {accounts.length && ( 
-            <div> 
-                <button onClick={handleMint}> Mint </button>
-            </div>
-            
-            )}
-            </div>
-            ) : (
-                <div>
-                <button onClick={connectAccounts}>Connect</button>
-                </div>
-        )}
-        <br></br>
-        <div className="grid">
-         {mintEvents.map((mintEvent) => (
-         <div className="mint-card" key={mintEvent.tokenId}>
-            <p>Owner: {mintEvent.to}</p>
-            <p>Token ID: {`${mintEvent.tokenId}`}</p>
-            <p>Token Name: {mintEvent.name}</p>
-            <p>Power: {`${mintEvent.power}`}</p>
-            <p>Deduction: {`${mintEvent.deduction}`}</p>
-            <p>Health: {`${mintEvent.health}`}</p>
-            <p>Presence: {`${mintEvent.presence}`}</p>
+return (
+  <div className="container">
+    <h1 className="title">Mint Your Hero</h1>
+    <br />
+
+    {isConnected ? (
+      <div className="connected-content">
+        <p className="connected">Connected</p>
+        <br />
+        <input
+          className="input-field"
+          placeholder="Power"
+          type="number"
+          value={power}
+          onChange={(e) => setPower(e.target.value)}
+        />
+        <input
+          className="input-field"
+          placeholder="Deduction"
+          type="number"
+          value={deduction}
+          onChange={(e) => setDeduction(e.target.value)}
+        />
+        <input
+          className="input-field"
+          placeholder="Health"
+          type="number"
+          value={health}
+          onChange={(e) => setHealth(e.target.value)}
+        />
+        <input
+          className="input-field"
+          placeholder="Presence"
+          type="number"
+          value={presence}
+          onChange={(e) => setPresence(e.target.value)}
+        />
+        <input
+          className="input-field"
+          placeholder="Name"
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        {accounts.length && (
+          <div className="mint-button-container">
+            <button className="mint-button" onClick={handleMint}>
+              Mint
+            </button>
           </div>
-        ))}
+        )}
       </div>
+    ) : (
+      <div className="connect-button-container">
+        <button className="connect-button" onClick={connectAccounts}>
+          Connect
+        </button>
+      </div>
+    )}
+    <br />
+    <div className="grid">
+    {mintEvents.map((mintEvent) => (
+  <div className="mint-card" key={mintEvent.tokenId}>
+    <h3 className="mint-card-title">{mintEvent.name}</h3> {/* Added heading for token name */}
+    <div className="mint-card-info">
+      <p className="mint-card-owner">Owner: {mintEvent.to}</p> {/* Specific class for owner */}
+      <p className="mint-card-token-id">Token ID: {`${mintEvent.tokenId}`}</p> {/* Specific class for token ID */}
+      <p className="mint-card-stats">
+        <span>Power: {`${mintEvent.power}`}</span> {/* Wrapped stats in a span for grouping */}
+        <span>Deduction: {`${mintEvent.deduction}`}</span>
+        <span>Health: {`${mintEvent.health}`}</span>
+        <span>Presence: {`${mintEvent.presence}`}</span>
+      </p>
     </div>
-        
-    );
+  </div>
+))}
+
+    </div>
+  </div>
+);
 }
 
 export default Mint;
